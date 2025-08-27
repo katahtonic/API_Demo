@@ -7,3 +7,6 @@ services:
     ports:
       - "8080:8080"
     container_name: api-demo-container
+    environment:
+      GEO_USERNAME: "1218310"
+      GEO_API_KEY: "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"

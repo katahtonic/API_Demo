@@ -8,12 +8,15 @@ import (
 	"os"
 
 	models "API_Demo/models"
+
+	"github.com/joho/godotenv"
 )
 
-var (
-	GeoUsername = os.Getenv("GEO_USERNAME")
-	GeoAPIKey   = os.Getenv("GEO_API_KEY")
-)
+func init() {
+	if err := godotenv.Load(); err != nil {
+		fmt.Println("Error loading .env file")
+	}
+}
 
 const (
 	GeoBaseURL     = "https://geoip.maxmind.com/geoip/v2.1/country"
@@ -146,7 +149,9 @@ func contains(slice []string, item string) bool {
 
 // fetchGeoData fetches geolocation data for a given IP address
 func fetchGeoData(ip string) (models.GeoIPResponse, error) {
-	// url := fmt.Sprintf("%s/%s", GeoBaseURL, ip)
+	GeoUsername := os.Getenv("GEO_USERNAME")
+	GeoAPIKey := os.Getenv("GEO_API_KEY")
+
 	url := fmt.Sprintf("%s/%s", GeoLiteBaseURL, ip)
 	fmt.Printf("Fetching geo data from URL: %s\n", url)
 
@@ -155,6 +160,7 @@ func fetchGeoData(ip string) (models.GeoIPResponse, error) {
 		return models.GeoIPResponse{}, fmt.Errorf("failed to create request: %w", err)
 	}
 
+	fmt.Println("Using GeoIP Username:", GeoUsername)
 	req.SetBasicAuth(GeoUsername, GeoAPIKey)
 
 	client := &http.Client{}
