@@ -5,13 +5,17 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 
 	models "API_Demo/models"
 )
 
+var (
+	GeoUsername = os.Getenv("GEO_USERNAME")
+	GeoAPIKey   = os.Getenv("GEO_API_KEY")
+)
+
 const (
-	GeoUsername    = "1218310"
-	GeoAPIKey      = "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"
 	GeoBaseURL     = "https://geoip.maxmind.com/geoip/v2.1/country"
 	GeoLiteBaseURL = "https://geolite.info/geoip/v2.1/country"
 )
