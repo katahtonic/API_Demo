@@ -36,3 +36,17 @@ Both API endpoints for user Login will respond with the same data.
 ## Models
 
 Models.go contains the type definitions of Customer, GeoIPResponse, as well as dummy data for testing purposes to be used with no DB or for reference of some valid IPs and their country codes. 
+
+## ENV to run locally
+
+In order to successfully connect to the GeoIP API, 2 environment variables need to be exported. 
+
+## Docker container
+
+Running in a docker container 
+
+`docker run -e GEO_USERNAME=<your account id number here> -e GEO_API_KEY=<your key here> api-demo`
+
+## MaxMind Web API integration
+MaxMind supplies a very simple api endpoint to check the origin country for an HTTP request,
+I chose to integrate it's functionality, without requiring the actual package installation. 
